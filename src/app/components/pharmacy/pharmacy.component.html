@@ -157,6 +157,7 @@
                 <div class="card">
                   <div class="card-header">
                     <p *ngIf = "!locationEnabled" class="card-category"> <img src="https://img.icons8.com/nolan/25/worldwide-location.png"/> Location is not enabled</p>
+                    <span class="pull-right" *ngIf = "!markers || markers.length <= 0" > Click on <img src="https://img.icons8.com/nolan/25/waypoint-map.png"/> icon to view the location on map.</span>
                     <span class="pull-right" *ngIf = "markers && markers.length > 0" (click) = "deleteMarkers()"><img src="https://img.icons8.com/nolan/25/clear-symbol.png"/></span>
                 </div>
                   <div #mapContainer id="map"></div>

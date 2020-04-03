@@ -226,6 +226,7 @@ export class PharmacyComponent implements OnInit, AfterViewInit  {
 
      this.markers.push(marker);
      this.setMapBounds();
+     this.gmap.nativeElement.focus();
   }
 
   deleteMarkers() {

@@ -14,6 +14,8 @@ export class HttpService {
 
   // tslint:disable-next-line: variable-name
   private api_url = `${environment.api_base_url}`;
+  private api_url2 = `${environment.api_base_url2}`;
+
   constructor(
     private http: HttpClient
   ) {
@@ -38,6 +40,14 @@ export class HttpService {
   getData(): Observable<any> {
     return this.http
       .get<any>(`${this.api_url}`, { headers: this.headers })
+      .pipe(
+        catchError(err => this.handleError(err))
+      );
+  }
+
+  getData2(): Observable<any> {
+    return this.http
+      .get<any>(`${this.api_url2}`, { headers: this.headers })
       .pipe(
         catchError(err => this.handleError(err))
       );

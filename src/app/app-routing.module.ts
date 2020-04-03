@@ -9,10 +9,12 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
+import { PharmacyComponent } from './components/pharmacy/pharmacy.component';
 
 
 const routes: Routes = [
   { path: 'info',      component: InfoComponent },
+  { path: 'pharmacy',      component: PharmacyComponent },
     { path: '',
     redirectTo: '/info',
     pathMatch: 'full'

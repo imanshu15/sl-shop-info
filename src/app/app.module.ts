@@ -24,13 +24,15 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { PharmacyComponent } from './components/pharmacy/pharmacy.component';
 @NgModule({
   declarations: [
     AppComponent,
     InfoComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    PharmacyComponent
   ],
   imports: [
     BrowserAnimationsModule,

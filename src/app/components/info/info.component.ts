@@ -56,6 +56,7 @@ export class InfoComponent implements OnInit {
        this.dataSource.paginator = this.paginator;
     });
 
+    this.dataService.transformData2().then(a => { console.log(a); });
   }
 
   public filterBy(value: any, field: string) {
@@ -72,7 +73,7 @@ export class InfoComponent implements OnInit {
   public onSearch() {
 
     let data = this.dataList.dataList;
-    console.log(data);
+
     if (this.area) {
       data = data.filter(a => a.area.indexOf(this.area) > -1);
     }
@@ -85,20 +86,39 @@ export class InfoComponent implements OnInit {
     this.dataSource.data = data;
   }
 
+  public onReset() {
+    this.areaControl.reset(); this.area = null;
+    this.itemControl.reset(); this.item = null;
+    this.vendorControl.reset(); this.vendor = null;
+    this.onSearch();
+  }
+
   private _filterArea(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    // tslint:disable-next-line: max-line-length
-    return this.dataList && this.dataList.areas ? this.dataList.areas.filter(option => option.toLowerCase().indexOf(filterValue) === 0) : [];
+    if (value) {
+      const filterValue = value.toLowerCase();
+      // tslint:disable-next-line: max-line-length
+      return this.dataList && this.dataList.areas ? this.dataList.areas.filter(option => option && option.toLowerCase().indexOf(filterValue) === 0) : [];
+    } else {
+      return this.dataList && this.dataList.areas ? this.dataList.areas : [];
+    }
   }
   private _filterItem(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    // tslint:disable-next-line: max-line-length
-    return this.dataList && this.dataList.items ? this.dataList.items.filter(option => option.toLowerCase().indexOf(filterValue) === 0) : [];
+    if (value) {
+      const filterValue = value.toLowerCase();
+      // tslint:disable-next-line: max-line-length
+      return this.dataList && this.dataList.items ? this.dataList.items.filter(option => option && option.toLowerCase().indexOf(filterValue) === 0) : [];
+    } else {
+      return this.dataList && this.dataList.items ? this.dataList.items : [];
+    }
   }
   private _filterVendor(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    // tslint:disable-next-line: max-line-length
-    return this.dataList && this.dataList.vendors ? this.dataList.vendors.filter(option => option.toLowerCase().indexOf(filterValue) === 0) : [];
+    if (value) {
+      const filterValue = value.toLowerCase();
+      // tslint:disable-next-line: max-line-length
+      return this.dataList && this.dataList.vendors ? this.dataList.vendors.filter(option => option && option.toLowerCase().indexOf(filterValue) === 0) : [];
+    } else {
+      return this.dataList && this.dataList.vendors ? this.dataList.vendors : [];
+    }
   }
 
 

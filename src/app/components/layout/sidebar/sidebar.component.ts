@@ -6,9 +6,12 @@ declare interface RouteInfo {
     title: string;
     icon: string;
     class: string;
+    href?: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: '/info', title: 'Finder',  icon: 'dashboard', class: '' }
+    { path: '/info', title: 'Groceries Finder',  icon: 'dashboard', class: '' },
+    { path: '/pharmacy', title: 'Pharmacy Finder',  icon: 'local_pharmacy', class: '' },
+    { path: '/covid', title: 'Covid 19 Stats',  icon: 'timeline', class: '', href: 'https://imanshu15.github.io/covid-nineteen/'}
 ];
 
 @Component({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { Details, DataModel, SocialMedia, DataList } from '../models/details.model';
+import { Details, DataModel, SocialMedia, DataList, PharmacyModel } from '../models/details.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,10 @@ export class DataService {
 
   public getData(): Promise<any> {
     return this.httpService.getData().toPromise();
+  }
+
+  public getData2(): Promise<any> {
+    return this.httpService.getData2().toPromise();
   }
 
   public transformData(): Promise<any> {
@@ -41,6 +45,36 @@ export class DataService {
           temp.whatsapp = socialMedia.whatsapp;
           temp.viber = socialMedia.viber;
           temp.comments = this.sentenceCase(y[4]);
+          returnData.push(temp);
+        });
+
+        resolve(returnData);
+      });
+    });
+  }
+
+  public transformData2(): Promise<any> {
+
+    return new Promise((resolve, reject) => {
+      const returnData: PharmacyModel[] = [];
+
+      this.getData2().then(data => {
+        const validData = data.filter(x => x.No !== null).slice(1);
+
+        // tslint:disable-next-line: forin
+        validData.forEach(y => {
+          const temp: PharmacyModel = new PharmacyModel();
+          temp.no = y.No;
+          temp.district = y.District;
+          temp.area = y['MOH Area'];
+          temp.address = y.Address;
+          temp.name = y['Name of the Pharmacy'];
+          temp.pharmacist = y['Pharmacist Name'];
+          temp.owner = y.Owner;
+          temp.contactNo = y['Contact No.'];
+          temp.whatsapp = y['Whatsapp No.'];
+          temp.viber = y['Viber No.'];
+          temp.email = y['E mail'];
           returnData.push(temp);
         });
 

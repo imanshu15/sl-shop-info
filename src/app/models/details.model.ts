@@ -33,3 +33,17 @@ export class DataList {
     items: string[];
     dataList: DataModel[];
 }
+
+export class PharmacyModel {
+    no: string;
+    district: string;
+    area: string;
+    name: string;
+    address: string;
+    contactNo: string;
+    whatsapp: string;
+    viber: string;
+    email: string;
+    owner: string;
+    pharmacist: string;
+}

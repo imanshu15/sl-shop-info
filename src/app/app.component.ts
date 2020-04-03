@@ -123,6 +123,7 @@ export class AppComponent implements OnInit {
               $sidebar_responsive.css('background-image','url("' + new_image + '")');
           }
       });
+
   }
   ngAfterViewInit() {
       this.runOnRouteChange();

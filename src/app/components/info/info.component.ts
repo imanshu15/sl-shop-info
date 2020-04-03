@@ -56,7 +56,6 @@ export class InfoComponent implements OnInit {
        this.dataSource.paginator = this.paginator;
     });
 
-    this.dataService.transformData2().then(a => { console.log(a); });
   }
 
   public filterBy(value: any, field: string) {

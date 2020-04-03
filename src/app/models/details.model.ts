@@ -47,3 +47,10 @@ export class PharmacyModel {
     owner: string;
     pharmacist: string;
 }
+
+export class PharmacyList {
+    districts: string[];
+    areas: string[];
+    pharmacys: string[];
+    dataList: PharmacyModel[];
+}

@@ -1,1 +1,158 @@
-<div #gmap style="width:100%;height:400px"></div>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Online Pharmacy Finder</h4>
+                        <p class="card-category">Search through here</p>
+                    </div>
+                    <div class="card-body">
+                            <div class="row top-mag-10">
+                                <div class="col-md-12">
+                                  <mat-form-field >
+                                    <input type="text"
+                                           placeholder="Select District"
+                                           matInput
+                                           [formControl]="districtControl"
+                                           [matAutocomplete]="auto1">
+                                    <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete" (optionSelected)='filterBy($event.option.value, "district")'>
+                                      <mat-option *ngFor="let option of filteredDistrictOptions | async" [value]="option">
+                                        {{option}}
+                                      </mat-option>
+                                    </mat-autocomplete>
+                                  </mat-form-field>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-12">
+                                  <mat-form-field >
+                                    <input type="text"
+                                           placeholder="Select Area"
+                                           matInput
+                                           [formControl]="areaControl"
+                                           [matAutocomplete]="auto2">
+                                    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" (optionSelected)='filterBy($event.option.value, "area")'>
+                                      <mat-option *ngFor="let option of filteredAreaOptions | async" [value]="option">
+                                        {{option}}
+                                      </mat-option>
+                                    </mat-autocomplete>
+                                  </mat-form-field>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-12">
+                                  <mat-form-field>
+                                    <input type="text"
+                                           placeholder="Select Pharmacy"
+                                           matInput
+                                           [formControl]="pharmacyControl"
+                                           [matAutocomplete]="auto3">
+                                    <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete" (optionSelected)='filterBy($event.option.value, "pharmacy")'>
+                                      <mat-option *ngFor="let option of filteredPharmacyOptions | async" [value]="option">
+                                        {{option}}
+                                      </mat-option>
+                                    </mat-autocomplete>
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button (click) = "onSearch()" class="btn btn-danger pull-right">Search</button>
+                            <button mat-raised-button (click) = "onReset()" class="btn btn-warning pull-right">Reset</button>
+                            
+                            <div class="clearfix"></div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header card-header-warning">
+                            <p class="card-category">Search results</p>
+                        </div>
+                        <div class="card-body table-responsive">
+
+                          <div class="mat-elevation-z8">
+                            <mat-table [dataSource]="dataSource">
+                          
+                              <!-- Position Column -->
+                              <ng-container matColumnDef="district" width = "15%">
+                                <mat-header-cell *matHeaderCellDef > District </mat-header-cell>
+                                <mat-cell *matCellDef="let element" data-label="district"> {{element.district}} </mat-cell>
+                              </ng-container>
+                          
+                              <!-- Name Column -->
+                              <ng-container matColumnDef="area" width = "15%">
+                                <mat-header-cell *matHeaderCellDef> Area </mat-header-cell>
+                                <mat-cell *matCellDef="let element" data-label="area"> {{element.area}} </mat-cell>
+                              </ng-container>
+                          
+                              <!-- Weight Column -->
+                              <ng-container matColumnDef="name" width = "20%">
+                                <mat-header-cell *matHeaderCellDef> Pharmacy </mat-header-cell>
+                                <mat-cell *matCellDef="let element" data-label="pharmacy"> {{element.name}} </mat-cell>
+                              </ng-container>
+
+                              <ng-container matColumnDef="address" width = "40%">
+                                <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+                                <mat-cell *matCellDef="let element" data-label="address"> {{element.address}} </mat-cell>
+                              </ng-container>
+
+                              <ng-container matColumnDef="details" width = "10%">
+                                <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
+                                <mat-cell *matCellDef="let element" data-label="details">
+                                  <img src="https://img.icons8.com/ultraviolet/25/000000/view-file.png"/> View
+                                </mat-cell>
+                              </ng-container>
+
+                              <!-- <ng-container matColumnDef="contactNo" >
+                                <mat-header-cell *matHeaderCellDef> Contact </mat-header-cell>
+                                <mat-cell *matCellDef="let element" data-label="conatact"> 
+
+                                  <span   matTooltip="Click to copy" *ngIf = "element.contactNo  && element.contactNo != ''" [cdkCopyToClipboard]="element.contactNo">
+                                    <img src="https://img.icons8.com/android/16/000000/phone.png"/>
+                                     {{element.contactNo}}
+                                  </span>
+
+                                  <span matTooltip="Click to copy" *ngIf="element.whatsapp && element.whatsapp != ''"  [cdkCopyToClipboard]="element.whatsapp">
+                                    <span *ngIf = "element.contactNo  && element.contactNo != ''" > / </span>
+                                    <img *ngIf="element.whatsapp" src="https://img.icons8.com/officexs/16/000000/whatsapp.png"/>
+                                    {{element.whatsapp}} 
+                                  </span>
+
+                                  <span matTooltip="Click to copy" *ngIf="element.viber && element.viber != ''"  [cdkCopyToClipboard]="element.viber">
+                                    <span *ngIf = "(element.contactNo  && element.contactNo != '') || (element.whatsapp && element.whatsapp != '')" > / </span>
+                                    <img *ngIf="element.viber" src="https://img.icons8.com/color/16/000000/viber.png"/>
+                                    {{element.viber}} 
+                                  </span>
+
+                                  <span matTooltip="Click to copy" *ngIf="element.email && element.email != ''"  [cdkCopyToClipboard]="element.email">
+                                    <span *ngIf = "(element.contactNo  && element.contactNo != '') || (element.whatsapp && element.whatsapp != '') || (element.viber && element.viber != '')" > / </span>
+                                    <img src="https://img.icons8.com/nolan/16/email.png"/>
+                                    {{element.email}} 
+                                  </span>
+                               
+                                </mat-cell>
+                              </ng-container> -->
+
+                              <!-- <ng-container matColumnDef="owner" >
+                                <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
+                                <mat-cell *matCellDef="let element" data-label="Details"> 
+                                    <span *ngIf = "element.owner  && element.owner != ''" > Owner: {{element.owner}}  </span>
+                                    <span *ngIf = "element.pharmacist  && element.pharmacist != ''" > Pharmacist: {{element.pharmacist}}  </span>
+                                </mat-cell>
+                              </ng-container> -->
+                          
+                              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                              <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onClickRecord(row)"></mat-row>
+                            </mat-table>
+                          
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div #mapContainer id="map"></div>
+            </div>  
+        </div>
+    </div>
+
+

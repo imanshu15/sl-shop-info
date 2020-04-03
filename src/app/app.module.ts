@@ -25,6 +25,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PharmacyComponent } from './components/pharmacy/pharmacy.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { PharmacyDetailsComponent } from './components/pharmacy-details/pharmacy-details.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +35,8 @@ import { PharmacyComponent } from './components/pharmacy/pharmacy.component';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    PharmacyComponent
+    PharmacyComponent,
+    PharmacyDetailsComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -52,7 +56,8 @@ import { PharmacyComponent } from './components/pharmacy/pharmacy.component';
     MatTableModule,
     MatPaginatorModule,
     ClipboardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatBottomSheetModule
   ],
   providers: [HttpService, DataService],
   bootstrap: [AppComponent]

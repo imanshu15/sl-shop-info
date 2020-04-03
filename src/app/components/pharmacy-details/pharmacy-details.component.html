@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="card">
+        <div class="card-header card-header-warning align-center">
+            <p class="card-category"> {{ this.dataModel?.name }} </p>
+        </div>
+        <div class="card-body">
+              
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>
+                        <img src="https://img.icons8.com/ultraviolet/16/000000/address.png"/>
+                          Address
+                        </td>
+                        <td>
+                             {{ this.dataModel?.address }} 
+                        </td>
+                        <td class="td-actions text-right"> 
+                            <span [cdkCopyToClipboard]="this.dataModel?.address" matTooltip="Click to copy">
+                            <img src="https://img.icons8.com/ultraviolet/20/000000/copy-2.png"/>
+                             </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <img src="https://img.icons8.com/android/16/000000/phone.png"/>
+                          Contact
+                        </td>
+                        <td>
+                             {{ this.dataModel?.contactNo }} 
+                        </td>
+                        <td class="td-actions text-right"> 
+                            <span [cdkCopyToClipboard]="this.dataModel?.contactNo" matTooltip="Click to copy">
+                                <img src="https://img.icons8.com/ultraviolet/20/000000/copy-2.png"/>
+                                 </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <img src="https://img.icons8.com/officexs/16/000000/whatsapp.png"/>
+                          Whatsapp
+                        </td>
+                        <td>
+                             {{ this.dataModel?.whatsapp }} 
+                        </td>
+                        <td class="td-actions text-right"> 
+                            <span [cdkCopyToClipboard]="this.dataModel?.whatsapp" matTooltip="Click to copy">
+                                <img src="https://img.icons8.com/ultraviolet/20/000000/copy-2.png"/>
+                                 </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <img  src="https://img.icons8.com/color/16/000000/viber.png"/>
+                          Viber
+                        </td>
+                        <td>
+                             {{ this.dataModel?.viber }} 
+                        </td>
+                        <td class="td-actions text-right"> 
+                            <span [cdkCopyToClipboard]="this.dataModel?.viber" matTooltip="Click to copy">
+                                <img src="https://img.icons8.com/ultraviolet/20/000000/copy-2.png"/>
+                                 </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <img src="https://img.icons8.com/nolan/16/email.png"/>
+                          Email
+                        </td>
+                        <td>
+                             {{ this.dataModel?.email }} 
+                        </td>
+                        <td class="td-actions text-right"> 
+                            <span [cdkCopyToClipboard]="this.dataModel?.email" matTooltip="Click to copy">
+                                <img src="https://img.icons8.com/ultraviolet/20/000000/copy-2.png"/>
+                                 </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://img.icons8.com/ultraviolet/16/000000/administrator-male.png"/>
+                          Owner
+                        </td>
+                        <td>
+
+                             {{ this.dataModel?.owner }} 
+                        </td>
+                        <td class="td-actions text-right"> 
+                            <span [cdkCopyToClipboard]="this.dataModel?.owner" matTooltip="Click to copy">
+                                <img src="https://img.icons8.com/ultraviolet/20/000000/copy-2.png"/>
+                                 </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://img.icons8.com/ultraviolet/16/000000/pharmacist.png"/>
+                            Pharmacist
+                        </td>
+                        <td>
+                               {{ this.dataModel?.pharmacist }} 
+                        </td>
+                        <td class="td-actions text-right"> 
+                            <span [cdkCopyToClipboard]="this.dataModel?.pharmacist" matTooltip="Click to copy">
+                                <img src="https://img.icons8.com/ultraviolet/20/000000/copy-2.png"/>
+                                 </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="align-center">  <a (click) = "onClose($event)" class="btn btn-danger btn-round text-white">Close</a></div>
+
+        </div>
+        
+</div>

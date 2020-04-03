@@ -109,7 +109,7 @@
                                           <img src="https://img.icons8.com/office/16/000000/copy-link.png"/>
                                           {{element.website}} 
                                         </span>
-                                        <span matTooltip="Click to copy" *ngIf="element.contactComment && element.contactComment != ''"  [cdkCopyToClipboard]="element.website">
+                                        <span matTooltip="Click to copy" *ngIf="element.contactComment && element.contactComment != ''"  [cdkCopyToClipboard]="element.contactComment">
                                           <img src="https://img.icons8.com/ultraviolet/16/000000/comments.png"/>
                                           {{element.contactComment}} 
                                         </span>
@@ -128,42 +128,6 @@
                                 
                                   <mat-paginator [pageSizeOptions]="[8, 20, 30]" showFirstLastButtons></mat-paginator>
                                 </div>
-
-                                  <!-- <table class="table table-hover">
-                                      <thead class="text-warning">
-                                          <th>Area</th>
-                                          <th>Items</th>
-                                          <th>Vendor</th>
-                                          <th>Contact</th>
-                                          <th>Comment</th>
-                                      </thead>
-                                      <tbody>
-                                          <tr>
-                                              <td>1</td>
-                                              <td>Dakota Rice</td>
-                                              <td>$36,738</td>
-                                              <td>Niger</td>
-                                          </tr>
-                                          <tr>
-                                              <td>2</td>
-                                              <td>Minerva Hooper</td>
-                                              <td>$23,789</td>
-                                              <td>Curaçao</td>
-                                          </tr>
-                                          <tr>
-                                              <td>3</td>
-                                              <td>Sage Rodriguez</td>
-                                              <td>$56,142</td>
-                                              <td>Netherlands</td>
-                                          </tr>
-                                          <tr>
-                                              <td>4</td>
-                                              <td>Philip Chaney</td>
-                                              <td>$38,735</td>
-                                              <td>Korea, South</td>
-                                          </tr>
-                                      </tbody>
-                                  </table> -->
                               </div>
                           </div>
                       </div>

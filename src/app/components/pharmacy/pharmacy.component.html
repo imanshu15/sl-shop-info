@@ -56,7 +56,7 @@
                             </div>
                             <button mat-raised-button (click) = "onSearch()" class="btn btn-danger pull-right">Search</button>
                             <button mat-raised-button (click) = "onReset()" class="btn btn-warning pull-right">Reset</button>
-                            
+                            <!-- <button *ngIf= "this.district && this.district != ''" mat-raised-button (click) = "viewOnMap()" class="btn btn-warning pull-right">View on Map</button> -->
                             <div class="clearfix"></div>
                       </div>
                     </div>
@@ -97,7 +97,8 @@
                               <ng-container matColumnDef="details" width = "10%">
                                 <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
                                 <mat-cell *matCellDef="let element" data-label="details">
-                                  <img src="https://img.icons8.com/ultraviolet/25/000000/view-file.png"/> View
+                                 <span (click)="onClickRecord(element)"><img src="https://img.icons8.com/ultraviolet/25/000000/view-file.png"/> View</span> 
+                                 <span *ngIf = "element.address && element.address != ''" (click)="setMarkers(element)"><img src="https://img.icons8.com/nolan/25/waypoint-map.png"/>Map</span> 
                                 </mat-cell>
                               </ng-container>
 
@@ -140,7 +141,7 @@
                               </ng-container> -->
                           
                               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                              <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onClickRecord(row)"></mat-row>
+                              <mat-row *matRowDef="let row; columns: displayedColumns;" ></mat-row>
                             </mat-table>
                           
                             <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
@@ -150,7 +151,18 @@
                 </div>
             </div>
             <div class="row">
-                <div #mapContainer id="map"></div>
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-10">
+                <div class="card">
+                  <div class="card-header">
+                    <p *ngIf = "!locationEnabled" class="card-category"> <img src="https://img.icons8.com/nolan/25/worldwide-location.png"/> Location is not enabled</p>
+                    <span class="pull-right" *ngIf = "markers && markers.length > 0" (click) = "deleteMarkers()"><img src="https://img.icons8.com/nolan/25/clear-symbol.png"/></span>
+                </div>
+                  <div #mapContainer id="map"></div>
+                </div>
+              </div>
+
             </div>  
         </div>
     </div>

@@ -13,7 +13,6 @@ export class PharmacyDetailsComponent implements OnInit {
   // tslint:disable-next-line: variable-name
   constructor(private _bottomSheetRef: MatBottomSheetRef<PharmacyDetailsComponent>, @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
     if (data) {
-      console.log(data);
       this.dataModel = data;
     }
   }

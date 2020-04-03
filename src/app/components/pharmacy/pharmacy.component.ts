@@ -41,13 +41,15 @@ export class PharmacyComponent implements OnInit, AfterViewInit  {
   displayedColumns: string[] = ['district', 'area', 'name', 'address', 'details'];
   dataSource = new MatTableDataSource<PharmacyModel>();
 
-  private district: string;
-  private area: string;
-  private pharmacy: string;
+   district: string;
+   area: string;
+   pharmacy: string;
+   locationEnabled = false;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   public dataList: PharmacyList;
+  markers = [];
 
   constructor(private dataService: DataService, private bottomSheet: MatBottomSheet) { }
 
@@ -57,7 +59,7 @@ export class PharmacyComponent implements OnInit, AfterViewInit  {
       if (a) {
         this.setUpData(a)
         this.dataList.dataList = a;
-        this.setMarkers();
+        // this.setMarkers();
 
         this.filteredDistrictOptions = this.districtControl.valueChanges.pipe(
           startWith(''),
@@ -95,6 +97,10 @@ export class PharmacyComponent implements OnInit, AfterViewInit  {
     this.dataSource.data = data;
   }
 
+  // viewOnMap() {
+  //   this.setMarkers(this.dataSource.data);
+  // }
+
   public filterBy(value: any, field: string) {
     if (field === 'area') {
       this.area = value;
@@ -120,6 +126,7 @@ export class PharmacyComponent implements OnInit, AfterViewInit  {
       data = data.filter(a => a.name.includes(this.pharmacy));
     }
     this.dataSource.data = data;
+   // this.setMarkers();
   }
 
   public onReset() {
@@ -162,6 +169,7 @@ export class PharmacyComponent implements OnInit, AfterViewInit  {
     this.mapInitializer();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
+        this.locationEnabled = true;
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
 
@@ -171,7 +179,7 @@ export class PharmacyComponent implements OnInit, AfterViewInit  {
         this.map.setZoom(15);
 
         if (!this.marker) {
-          const image = 'https://img.icons8.com/nolan/50/street-view.png';
+          const image = 'https://img.icons8.com/nolan/60/street-view.png';
           this.marker = new google.maps.Marker({
             position: location,
             map: this.map,
@@ -193,11 +201,8 @@ export class PharmacyComponent implements OnInit, AfterViewInit  {
     this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
    }
 
-   setMarkers() {
-      if (this.dataList && this.dataList.dataList.length > 0) {
-        // tslint:disable-next-line: prefer-for-of
-        for (let i = 0; i < 1; i++) {
-          const pharmcy = this.dataList.dataList[i];
+   setMarkers(pharmcy: PharmacyModel) {
+     if (pharmcy) {
           // tslint:disable-next-line: only-arrow-functions
           this.geocoder.geocode({address: pharmcy.address}, function(results, status) {
             if (status === 'OK') {
@@ -206,18 +211,42 @@ export class PharmacyComponent implements OnInit, AfterViewInit  {
               console.log('ERROR', status);
             }
           }.bind(this));
-        }
       }
    }
 
 
    setMarker(results, name) {
-     const image = 'https://img.icons8.com/ultraviolet/100/000000/clinic.png';
-     this.marker = new google.maps.Marker({
+     const image = 'https://img.icons8.com/color/30/000000/clinic.png';
+     const marker = new google.maps.Marker({
       position: results[0].geometry.location,
       map: this.map,
       title: name,
       icon: image
     });
+
+     this.markers.push(marker);
+     this.setMapBounds();
+  }
+
+  deleteMarkers() {
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.markers.length; i++) {
+      this.markers[i].setMap(null);
+    }
+    this.markers = [];
+  }
+
+  setMapBounds() {
+    const temp = [];
+    temp.push(this.marker);
+    temp.push(this.markers[0]);
+
+    const bounds = new google.maps.LatLngBounds();
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < temp.length; i++) {
+    bounds.extend(temp[i].getPosition());
+    }
+
+    this.map.fitBounds(bounds);
   }
 }
